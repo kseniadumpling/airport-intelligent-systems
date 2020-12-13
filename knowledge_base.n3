@@ -1,0 +1,76 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix mc: <urn:myClasses:>.
+@prefix mo: <urn:myObjects:>.
+@prefix mp: <urn:myProperties:>.
+
+mc:Formulas a rdfs:Class.
+mo:formula a mc:Formulas.
+mo:emergencyFormula a mc:Formulas;
+    mp:checks mo:emergency.
+
+mc:Algorithms a rdfs:Class.
+mo:algorithm a mc:Algorithms.
+mo:analyzeDirections a mc:Algorithms.
+mo:analyze_fuel a mc:Algorithms;
+    mp:checks mo:fuel_percent.
+
+mc:NeuralNetwork a rdfs:Class.
+mo:neural_network a mc:NeuralNetwork.
+mo:weather_nn a mc:NeuralNetwork.
+
+mc:Action a rdfs:Class.
+mo:check_emergency a mc:Action;
+    mp:needs mo:algorithm;
+    mp:calls mo:analyze_emergency.
+mo:check_fuel a mc:Action;
+    mp:needs mo:algorithm;
+    mp:calls mo:analyze_fuel.
+mo:get_wind_info a mc:Action;
+    mp:needs mo:neural_network;
+    mp:calls mo:weather_nn.
+mo:match_availability a mc:Action;
+    mp:needs mo:algorithm;
+    mp:calls mo:analyze_directions.
+mo:get_order a mc:Action;
+    mp:needs mo:algorithm;
+    mp:calls mo:analyze_order.
+
+
+mc:Aircrafts a rdfs:Class.
+mc:Runways a rdfs:Class.
+
+mc:Models a rdfs:Class.
+mc:Priorities a rdfs:Class.
+mc:Emergencies a rdfs:Class.
+mc:Directions a rdfs:Class.
+mc:Fuel a rdfs:Class.
+mc:Time a rdfs:Class.
+mc:Order a rdfs:Class.
+
+mo:model a mc:Models.
+mo:priority a mc:Priorities.
+mo:emergency a mc:Emergencies;
+    mp:priority_restrict_value 2.
+mo:direction a mc:Directions.
+mo:fuel_percent a mc:Fuel;
+    mp:no_less_than 0;
+    mp:no_more_than 100;
+    mp:critical_value 5.
+
+mo:airtime a mc:Time.
+
+mo:aircraft a mc:Aircrafts;
+    mp:contains mo:model, mo:fuel_percent, mo:priority, mo:emergency, mo:airtime;
+    mp:calls mo:check_fuel, mo:check_emergency.
+
+mo:runway a mc:Runways;
+    mp:contains mo:state, mo:direction;
+    mp:needs mo:get_wind_info;
+    mp:calls mo:match_availability.
+
+mo:order a mc:Order;
+    mp:calls mo:get_order.
+
+

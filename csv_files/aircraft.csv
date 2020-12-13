@@ -1,0 +1,4 @@
+model,fuel_percent,priority,emergency,airtime
+0,40,8,0,180
+1,60,4,0,140
+0,20,5,0,60

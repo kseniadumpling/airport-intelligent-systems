@@ -1,0 +1,20 @@
+[
+    {
+        "id": "RUNWAY_1",
+        "state": "available",
+        "direction": "n",
+        "queue": 0
+    },
+    {
+        "id": "RUNWAY_2",
+        "state": "available",
+        "direction": "e",
+        "queue": 0
+    },
+    {
+        "id": "RUNWAY_3",
+        "state": "closed",
+        "direction": "w",
+        "queue": 0
+    }
+]

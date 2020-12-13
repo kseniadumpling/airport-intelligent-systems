@@ -1,0 +1,20 @@
+{
+    "aircraft": [
+        {
+            "name": "PLANE_1",
+            "model": 0,
+            "fuel_percent": 30,
+            "priority": 1,
+            "emergency": 0,
+            "airtime": 180
+        },
+        {
+            "name": "PLANE_2",
+            "model": 1,
+            "fuel_percent": 70,
+            "priority": 1,
+            "emergency": 0,
+            "airtime": 40
+        }
+    ]
+}

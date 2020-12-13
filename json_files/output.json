@@ -1,0 +1,10 @@
+[
+    {
+        "aircraft": "PLANE_1",
+        "runway": "RUNWAY_1"
+    },
+    {
+        "aircraft": "PLANE_2",
+        "runway": "RUNWAY_2"
+    }
+]
