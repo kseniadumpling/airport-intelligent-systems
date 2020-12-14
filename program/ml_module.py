@@ -23,7 +23,7 @@ def call_nn(nn, res):
 # ---------- aircraft ml ----------
 
 def predict_fields(aircraft, faulted_field_list):
-    # Clasterization of aircrafts by k-mans method, learning without teachers
+    # Clasterization of aircrafts by k-means method, learning without teachers
 
     dataset = pd.read_csv('../csv_files/aircraft.csv').drop('priority', axis=1).drop('emergency', axis=1)
 
@@ -34,6 +34,7 @@ def predict_fields(aircraft, faulted_field_list):
     
 
     default_aircraft = {
+        "name": "Default_Name",
         "model": 1,
         "fuel_percent": 50,
         "priority": 5,

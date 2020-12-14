@@ -19,22 +19,24 @@ def call_algorithms(alg_name, obj = {}, res = [], additional = []):
         for row in g.query("SELECT ?s WHERE { mo:fuel_percent mp:critical_value ?s .}"):
             critical_value = int(split_res(row.s))
 
-        if obj['fuel_percent'] < lower_bounds or obj['fuel_percent'] > upped_bounds:
-            res.append('fuel_percent')
-        elif obj['fuel_percent'] <= critical_value:
-            obj['emergency'] = 1
+        if 'fuel_percent' in obj:
+            if obj['fuel_percent'] < lower_bounds or obj['fuel_percent'] > upped_bounds:
+                res.append('fuel_percent')
+            elif obj['fuel_percent'] <= critical_value:
+                obj['emergency'] = 1
 
     elif alg_name == 'analyze_emergency':
         priority_val = 0
         for row in g.query("SELECT ?s WHERE { mo:fuel_percent mp:priority_restrict_value ?s .}"):
             priority_val = int(split_res(row.s))
 
-        if obj['emergency'] == 0:
-            if obj['priority'] < priority_val: 
-                obj['priority'] = priority_val
-        else:
-            if obj['priority'] > priority_val: 
-                obj['priority'] = priority_val
+        if 'emergency' in obj:
+            if obj['emergency'] == 0:
+                if obj['priority'] < priority_val: 
+                    obj['priority'] = priority_val
+            else:
+                if obj['priority'] > priority_val: 
+                    obj['priority'] = priority_val
 
     elif alg_name == 'analyze_directions':
         wind_dir = additional[0]
