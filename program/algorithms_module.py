@@ -41,10 +41,16 @@ def call_algorithms(alg_name, obj = {}, res = [], additional = []):
         wind_speed = additional[1]
 
         if wind_speed > 5:
-            if (wind_dir == 'n' or wind_dir == 's') and (obj['direction'] == 'e' or obj['direction'] == 'w'):
-                obj['state'] = 'closed'
-            elif (wind_dir == 'e' or wind_dir == 'w') and (obj['direction'] == 'n' or obj['direction'] == 's'):
-                obj['state'] = 'closed'
+            if wind_dir == 'n' or wind_dir == 's':
+                if obj['direction'] == 'e' or obj['direction'] == 'w':
+                    obj['state'] = 'closed'
+                else:
+                    obj['state'] = 'available'
+            elif wind_dir == 'e' or wind_dir == 'w':
+                if obj['direction'] == 'n' or obj['direction'] == 's':
+                    obj['state'] = 'closed'
+                else:
+                    obj['state'] = 'available'
 
     elif alg_name == 'analyze_order':
         aircrafts = additional[0]
